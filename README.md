@@ -28,6 +28,6 @@ docker run -d --restart=unless-stopped \
   --privileged \  
   rancher/rancher:latest  
 Option B: Bring your own certificate, Self-signed  
-We can
-
-
+We can  
+IV. Prometheus  
+![Alt text](images/before.png?raw=true "Title")
