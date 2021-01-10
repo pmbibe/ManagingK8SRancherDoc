@@ -2,7 +2,7 @@ Rancher with Kubernetes
 I.	Overview Rancher  
 II.	Install Rancher  
 III.	Configuration Rancher  
-IV.	Prometheus   
+IV.	Prometheus     
 I.	Overview Rancher  
  Rancher is open source software that combines everything an organization needs to adopt and run containers in production. Built on Kubernetes, Rancher makes it easy for DevOps teams to test, deploy and manage their applications.    
  Rancher was originally built to work with multiple orchestrators, and it included its own orchestrator called “Cattle”. With the rise of Kubernetes clusters in the marketplace, Rancher 2.x exclusively deploys and manages Kubernetes clusters running anywhere, on any provider  
