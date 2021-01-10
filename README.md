@@ -29,5 +29,10 @@ docker run -d --restart=unless-stopped \
   rancher/rancher:latest  
 Option B: Bring your own certificate, Self-signed  
 We can  
+III.	Configuration Rancher 
+![Alt text](images/Pic01.PNG?raw=true "Title")
+![Alt text](images/Pic02.PNG?raw=true "Title")
+![Alt text](images/Pic03.PNG?raw=true "Title")
+![Alt text](images/Pic04.PNG?raw=true "Title")
 IV. Prometheus  
 ![Alt text](images/Pic005.PNG?raw=true "Title")
