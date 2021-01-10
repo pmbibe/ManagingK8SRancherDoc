@@ -20,7 +20,7 @@ With Rancher 2.4.0++, some requirements are changed.
 2.	Install Rancher  
 Option A: Default Rancher-generated Self-signed Certificate  
 If you are installing Rancher in a development or testing environment where identity verification isn’t a concern, install Rancher using the self-signed certificate that it generates. This installation option omits the hassle of generating a certificate yourself.  
-** docker run -d --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher:v2.4-head-linux-amd64  **
+**docker run -d --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher:v2.4-head-linux-amd64**
 Option B: Bring your own certificate, Self-signed  
 We can  
 III.	Configuration Rancher 
