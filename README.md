@@ -8,12 +8,12 @@ It then enables detailed monitoring and alerting for clusters and their resource
 Rancher is a complete container management platform for Kubernetes, giving you the tools to successfully run Kubernetes anywhere.  
 In this paper, we just talk about how to manage Kubernetes by using Rancher, which is installed on a Single Node using Docker, its version 2.4.  
 ## II.	Install Rancher  
-1.	CPU and Memory Requirements  
+### 1.	CPU and Memory Requirements  
 These requirements apply to host with a single-node installation of Rancher.  
 ![Alt text](images/Pic006.PNG?raw=true "Title")  
 With Rancher 2.4.0++, some requirements are changed.  
 ![Alt text](images/Pic007.PNG?raw=true "Title")  
-2.	Install Rancher  
+### 2.	Install Rancher  
 **Option A: Default Rancher-generated Self-signed Certificate**
 If you are installing Rancher in a development or testing environment where identity verification isn’t a concern, install Rancher using the self-signed certificate that it generates. This installation option omits the hassle of generating a certificate yourself.  
 **docker run -d --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher:v2.4-head-linux-amd64**  
@@ -45,7 +45,7 @@ Note: Use the --no-cacerts as argument to the container to disable the default C
   rancher/rancher:v2.4-head-linux-amd64 \  
   --acme-domain <YOUR.DNS.NAME>**  
 With YOUR.DNS.NAME is your domain name    
-3.	Login and Import Cluster  
+### 3.	Login and Import Cluster  
 After you log in, you will make some one-time configurations such as: changing a password for the default admin account, setting the Rancher Server URL which can be your server’s IP address.  
 In order to import the exist Cluster, choose Add Cluster. It will give you a command which you have to run if for importing your Cluster into Rancher.  
 Then you can see your Cluster on Rancher.  
@@ -68,7 +68,7 @@ Using Prometheus, you can monitor Rancher at both the cluster level and project 
 - Project monitoring allows you to view the state of pods running in a given project. Prometheus collects metrics from the project’s deployed HTTP and TCP/UDP workloads.  
 As an administrator or cluster owner, you can configure Rancher to deploy Prometheus to monitor your Kubernetes cluster.  
 Note: Make sure that you are allowing traffic on port 9796 for each of your nodes because Prometheus will scrape metrics from here.  
-1.	Resource consumption  
+### 1.	Resource consumption  
 When enabling cluster monitoring, you need to ensure your worker nodes and Prometheus pod have enough resources. The tables below provides a guide of how much resource consumption will be used. In larger deployments, it is strongly advised that the monitoring infrastructure be placed on dedicated nodes in the cluster.  
 The table is the resource consumption of the Prometheus pod, which is based on the number of all the nodes in the cluster. The count of nodes includes the worker, control plane and etcd nodes. When enabling cluster level monitoring, you should adjust the CPU and Memory limits and reservation. 1 CPU = 1000 Milli CPU.  
 ![Alt text](images/Pic010.PNG?raw=true "Title")  
@@ -78,7 +78,7 @@ Besides the Prometheus pod, there are components that are deployed that require 
 ![Alt text](images/Pic014.PNG?raw=true "Title")  
 With Project-level Monitoring Resource Requirements as the table showed below:  
 ![Alt text](images/Pic012.PNG?raw=true "Title")
-2.	Prometheus Configuration  
+### 2.	Prometheus Configuration  
 The table given below shows basic configuration of Prometheus:  
 ![Alt text](images/Pic013.PNG?raw=true "Title")  
 After applying Prometheus, you wait for some minutes. When it completed, you can access Grafana via Rancher Proxy. The default username and password for the Granafa instance will be admin/admin. However, Grafana dashboards are served via the Rancher authentication proxy, so only user who currently authenticated into the Rancher server have access to Grafana dashboard.  
