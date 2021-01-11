@@ -45,10 +45,19 @@ Option D: Let’s Encrypt Certificate
   rancher/rancher:v2.4-head-linux-amd64 \  
   --acme-domain <YOUR.DNS.NAME>**  
 With YOUR.DNS.NAME is your domain name    
-III.	Configuration Rancher 
-![Alt text](images/Pic01.PNG?raw=true "Title")
-![Alt text](images/Pic02.PNG?raw=true "Title")
-![Alt text](images/Pic03.PNG?raw=true "Title")
-![Alt text](images/Pic04.PNG?raw=true "Title")
+3.	Login and Import Cluster  
+After you log in, you will make some one-time configurations such as: changing a password for the default admin account, setting the Rancher Server URL which can be your server’s IP address.  
+In order to import the exist Cluster, choose Add Cluster. It will give you a command which you have to run if for importing your Cluster into Rancher.  
+Then you can see your Cluster on Rancher.  
+![Alt text](images/Pic01.PNG?raw=true "Title")  
+ Click to your Cluster Name, you will see the Dashboard of your Cluster. It illustrates the information which your cluster, include: CPU, Memory, Pods, …  
+![Alt text](images/Pic02.PNG?raw=true "Title")  
+Further, it demonstrates some metrics such as: Cluster, Etcd, Kubernetes Components and Events of your Cluster  
+![Alt text](images/Pic03.PNG?raw=true "Title")   
+Instead of typing kubectl get node -o wide, you can see Node’s information of your Cluster here  
+![Alt text](images/Pic04.PNG?raw=true "Title")  
+III.	Configuration Rancher  
+
+
 IV. Prometheus  
 ![Alt text](images/Pic005.PNG?raw=true "Title")
