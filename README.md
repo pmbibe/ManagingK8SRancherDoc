@@ -36,7 +36,7 @@ Note: Use the --no-cacerts as argument to the container to disable the default C
   -v /<CERT_DIRECTORY>/<FULL_CHAIN.pem>:/etc/rancher/ssl/cert.pem \  
   -v /<CERT_DIRECTORY>/<PRIVATE_KEY.pem>:/etc/rancher/ssl/key.pem \  
         rancher/rancher:v2.4-head-linux-amd64 \  
-  --no-cacerts**
+  --no-cacerts**  
 Option D: Let’s Encrypt Certificate  
 	In production environments, you also have the option of using Let’s Encrypt certificates. You can bind the hostname to the IP address by creating an A record in DNS  
 **docker run -d --restart=unless-stopped \  
@@ -56,8 +56,32 @@ Further, it demonstrates some metrics such as: Cluster, Etcd, Kubernetes Compone
 ![Alt text](images/Pic03.PNG?raw=true "Title")   
 Instead of typing kubectl get node -o wide, you can see Node’s information of your Cluster here  
 ![Alt text](images/Pic04.PNG?raw=true "Title")  
-III.	Configuration Rancher  
+III.	 Install Prometheus  
+Prometheus provides a time series of your data. You can configure these services to collect logs at either the cluster level or the project level.  
+In other words, Prometheus lets you view metrics from your different Rancher and Kubernetes object. Using timestamps, Prometheus lets you query and view these metrics in easy-to-read graphs and visuals, either through the Rancher UI or Grafana, which is an analytics viewing platform deployed along with Prometheus.  
+By viewing data that Prometheus scrapes from you cluster control plane, nodes, and deployment, you can stay on top of everything happening in your cluster. You can then use these analytics to better run your organization: stop system emergencies before they start, develop maintenance strategies, restore crashed servers, etc.  
+Using Prometheus, you can monitor Rancher at both the cluster level and project level. For each cluster and project that is enabled for monitoring, Rancher deploys a Prometheus server.  
+•	Clustering monitoring allows you to view health of your Kubernetes cluster. Prometheus collects metrics from the cluster components below, which you can view in graphs and charts.  
+o	Kubernetes control plane  
+o	Etcd database  
+o	All nodes  
+•	Project monitoring allows you to view the state of pods running in a given project. Prometheus collects metrics from the project’s deployed HTTP and TCP/UDP workloads.  
+As an administrator or cluster owner, you can configure Rancher to deploy Prometheus to monitor your Kubernetes cluster.  
+Note: Make sure that you are allowing traffic on port 9796 for each of your nodes because Prometheus will scrape metrics from here.  
+1.	Resource consumption  
+When enabling cluster monitoring, you need to ensure your worker nodes and Prometheus pod have enough resources. The tables below provides a guide of how much resource consumption will be used. In larger deployments, it is strongly advised that the monitoring infrastructure be placed on dedicated nodes in the cluster.  
+The table is the resource consumption of the Prometheus pod, which is based on the number of all the nodes in the cluster. The count of nodes includes the worker, control plane and etcd nodes. When enabling cluster level monitoring, you should adjust the CPU and Memory limits and reservation. 1 CPU = 1000 Milli CPU.  
 
 
-IV. Prometheus  
+Additional pod resource requirement for cluster level monitoring.  
+
+Besides the Prometheus pod, there are components that are deployed that require additional resources on the worker nodes.  
+
+With Project-level Monitoring Resource Requirements as the table showed below:  
+
+2.	Prometheus Configuration  
+The table given below shows basic configuration of Prometheus:  
+
+After applying Prometheus, you wait for some minutes. When it completed, you can access Grafana via Rancher Proxy. The default username and password for the Granafa instance will be admin/admin. However, Grafana dashboards are served via the Rancher authentication proxy, so only user who currently authenticated into the Rancher server have access to Grafana dashboard.  
+
 ![Alt text](images/Pic005.PNG?raw=true "Title")
