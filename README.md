@@ -82,4 +82,9 @@ With Project-level Monitoring Resource Requirements as the table showed below:
 The table given below shows basic configuration of Prometheus:  
 ![Alt text](images/Pic013.PNG?raw=true "Title")  
 After applying Prometheus, you wait for some minutes. When it completed, you can access Grafana via Rancher Proxy. The default username and password for the Granafa instance will be admin/admin. However, Grafana dashboards are served via the Rancher authentication proxy, so only user who currently authenticated into the Rancher server have access to Grafana dashboard.  
-![Alt text](images/Pic005.PNG?raw=true "Title")
+![Alt text](images/Pic005.PNG?raw=true "Title")  
+  
+Reference:  
+1.	Integrating Rancher and Prometheus for Cluster Monitoring, https://rancher.com/docs/rancher/v2.x/en/monitoring-alerting/v2.0.x-v2.4.x/cluster-monitoring/  
+2.	Install Rancher, https://rancher.com/docs/rancher/v2.x/en/installation/other-installation-methods/single-node-docker/  
+3.	Prometheus Configuration, https://rancher.com/docs/rancher/v2.x/en/monitoring-alerting/v2.0.x-v2.4.x/cluster-monitoring/prometheus/
