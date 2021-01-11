@@ -61,11 +61,11 @@ Prometheus provides a time series of your data. You can configure these services
 In other words, Prometheus lets you view metrics from your different Rancher and Kubernetes object. Using timestamps, Prometheus lets you query and view these metrics in easy-to-read graphs and visuals, either through the Rancher UI or Grafana, which is an analytics viewing platform deployed along with Prometheus.  
 By viewing data that Prometheus scrapes from you cluster control plane, nodes, and deployment, you can stay on top of everything happening in your cluster. You can then use these analytics to better run your organization: stop system emergencies before they start, develop maintenance strategies, restore crashed servers, etc.  
 Using Prometheus, you can monitor Rancher at both the cluster level and project level. For each cluster and project that is enabled for monitoring, Rancher deploys a Prometheus server.  
-	•  Clustering monitoring allows you to view health of your Kubernetes cluster. Prometheus collects metrics from the cluster components below, which you can view in graphs and charts.  
-	o  Kubernetes control plane  
-	o  Etcd database  
-	o  All nodes  
-•	Project monitoring allows you to view the state of pods running in a given project. Prometheus collects metrics from the project’s deployed HTTP and TCP/UDP workloads.  
+- Clustering monitoring allows you to view health of your Kubernetes cluster. Prometheus collects metrics from the cluster components below, which you can view in graphs and charts.  
+    - Kubernetes control plane  
+    - Etcd database  
+    - All nodes  
+- Project monitoring allows you to view the state of pods running in a given project. Prometheus collects metrics from the project’s deployed HTTP and TCP/UDP workloads.  
 As an administrator or cluster owner, you can configure Rancher to deploy Prometheus to monitor your Kubernetes cluster.  
 Note: Make sure that you are allowing traffic on port 9796 for each of your nodes because Prometheus will scrape metrics from here.  
 1.	Resource consumption  
