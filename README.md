@@ -1,5 +1,5 @@
 # RKE    
-I.	Overview Rancher  
+## I.	Overview Rancher  
 Rancher is open source software that combines everything an organization needs to adopt and run containers in production. Built on Kubernetes, Rancher makes it easy for DevOps teams to test, deploy and manage their applications.    
 Rancher was originally built to work with multiple orchestrators, and it included its own orchestrator called “Cattle”. With the rise of Kubernetes clusters in the marketplace, Rancher 2.x exclusively deploys and manages Kubernetes clusters running anywhere, on any provider  
 One Rancher server installation can manage thousands of Kubernetes clusters and thousands of nodes form the same user interface.  
@@ -7,7 +7,7 @@ Rancher adds significant value on top of Kubernetes, first by centralizing authe
 It then enables detailed monitoring and alerting for clusters and their resources, ships logs to external providers, and integrates directly with Helm via the Application Catalog. If you have an external CI/CD system, you can plug it into Rancher, but if you don’t, Rancher even includes a pipeline engine to help you automatically deploy and upgrade workloads.
 Rancher is a complete container management platform for Kubernetes, giving you the tools to successfully run Kubernetes anywhere.  
 In this paper, we just talk about how to manage Kubernetes by using Rancher, which is installed on a Single Node using Docker, its version 2.4.  
-II.	Install Rancher  
+## II.	Install Rancher  
 1.	CPU and Memory Requirements  
 These requirements apply to host with a single-node installation of Rancher.  
 ![Alt text](images/Pic006.PNG?raw=true "Title")  
@@ -56,7 +56,7 @@ Further, it demonstrates some metrics such as: Cluster, Etcd, Kubernetes Compone
 ![Alt text](images/Pic03.PNG?raw=true "Title")   
 Instead of typing kubectl get node -o wide, you can see Node’s information of your Cluster here  
 ![Alt text](images/Pic04.PNG?raw=true "Title")  
-III.	 Install Prometheus  
+## III.	 Install Prometheus  
 Prometheus provides a time series of your data. You can configure these services to collect logs at either the cluster level or the project level.  
 In other words, Prometheus lets you view metrics from your different Rancher and Kubernetes object. Using timestamps, Prometheus lets you query and view these metrics in easy-to-read graphs and visuals, either through the Rancher UI or Grafana, which is an analytics viewing platform deployed along with Prometheus.  
 By viewing data that Prometheus scrapes from you cluster control plane, nodes, and deployment, you can stay on top of everything happening in your cluster. You can then use these analytics to better run your organization: stop system emergencies before they start, develop maintenance strategies, restore crashed servers, etc.  
@@ -84,7 +84,7 @@ The table given below shows basic configuration of Prometheus:
 After applying Prometheus, you wait for some minutes. When it completed, you can access Grafana via Rancher Proxy. The default username and password for the Granafa instance will be admin/admin. However, Grafana dashboards are served via the Rancher authentication proxy, so only user who currently authenticated into the Rancher server have access to Grafana dashboard.  
 ![Alt text](images/Pic005.PNG?raw=true "Title")  
   
-Reference:  
+## Reference:  
 1.	Integrating Rancher and Prometheus for Cluster Monitoring, https://rancher.com/docs/rancher/v2.x/en/monitoring-alerting/v2.0.x-v2.4.x/cluster-monitoring/  
 2.	Install Rancher, https://rancher.com/docs/rancher/v2.x/en/installation/other-installation-methods/single-node-docker/  
 3.	Prometheus Configuration, https://rancher.com/docs/rancher/v2.x/en/monitoring-alerting/v2.0.x-v2.4.x/cluster-monitoring/prometheus/
