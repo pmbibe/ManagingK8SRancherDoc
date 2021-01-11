@@ -71,17 +71,15 @@ Note: Make sure that you are allowing traffic on port 9796 for each of your node
 1.	Resource consumption  
 When enabling cluster monitoring, you need to ensure your worker nodes and Prometheus pod have enough resources. The tables below provides a guide of how much resource consumption will be used. In larger deployments, it is strongly advised that the monitoring infrastructure be placed on dedicated nodes in the cluster.  
 The table is the resource consumption of the Prometheus pod, which is based on the number of all the nodes in the cluster. The count of nodes includes the worker, control plane and etcd nodes. When enabling cluster level monitoring, you should adjust the CPU and Memory limits and reservation. 1 CPU = 1000 Milli CPU.  
-
-
+![Alt text](images/Pic010.PNG?raw=true "Title")  
 Additional pod resource requirement for cluster level monitoring.  
-
+![Alt text](images/Pic011.PNG?raw=true "Title")  
 Besides the Prometheus pod, there are components that are deployed that require additional resources on the worker nodes.  
-
+![Alt text](images/Pic014.PNG?raw=true "Title")  
 With Project-level Monitoring Resource Requirements as the table showed below:  
-
+![Alt text](images/Pic012.PNG?raw=true "Title")
 2.	Prometheus Configuration  
 The table given below shows basic configuration of Prometheus:  
-
+![Alt text](images/Pic013.PNG?raw=true "Title")  
 After applying Prometheus, you wait for some minutes. When it completed, you can access Grafana via Rancher Proxy. The default username and password for the Granafa instance will be admin/admin. However, Grafana dashboards are served via the Rancher authentication proxy, so only user who currently authenticated into the Rancher server have access to Grafana dashboard.  
-
 ![Alt text](images/Pic005.PNG?raw=true "Title")
