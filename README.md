@@ -1,5 +1,5 @@
-# Rancher Kubernetes Engine  RKE    
-**Keywords:** Rancher, RKE, Prometheus, Grafana, Kubernetes  
+# Using Rancher for manaing k8s Cluster     
+**Keywords:** Rancher, Prometheus, Grafana, Kubernetes  
 **Abstract:** In this paper, we just talk about how to manage Kubernetes by using Rancher, which is installed on a Single Node using Docker, its version 2.4.  
 ## I.	Overview Rancher  
 Rancher is open source software that combines everything an organization needs to adopt and run containers in production. Built on Kubernetes, Rancher makes it easy for DevOps teams to test, deploy and manage their applications.    
@@ -12,8 +12,6 @@ Rancher is a complete container management platform for Kubernetes, giving you t
 ### 1.	CPU and Memory Requirements  
 These requirements apply to host with a single-node installation of Rancher.  
 ![Alt text](images/Pic006.PNG?raw=true "Title")  
-With Rancher 2.4.0++, some requirements are changed.  
-![Alt text](images/Pic007.PNG?raw=true "Title")  
 ### 2.	Install Rancher  
 **Option A: Default Rancher-generated Self-signed Certificate**
 If you are installing Rancher in a development or testing environment where identity verification isn’t a concern, install Rancher using the self-signed certificate that it generates. This installation option omits the hassle of generating a certificate yourself.  
