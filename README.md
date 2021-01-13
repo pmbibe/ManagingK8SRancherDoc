@@ -11,7 +11,7 @@ Rancher is a complete container management platform for Kubernetes, giving you t
 ## II.	Install Rancher  
 ### 1.	CPU and Memory Requirements  
 These requirements apply to host with a single-node installation of Rancher.  
-![Alt text](images/Pic015.PNG?raw=true "Title")  
+![Alt text](images/Pic015.png?raw=true "Title")  
 ### 2.	Install Rancher  
 **Option A: Default Rancher-generated Self-signed Certificate**
 If you are installing Rancher in a development or testing environment where identity verification isn’t a concern, install Rancher using the self-signed certificate that it generates. This installation option omits the hassle of generating a certificate yourself.  
