@@ -1,4 +1,4 @@
-# Using Rancher for manaing k8s Cluster     
+# Using Rancher for managing k8s Cluster     
 **Keywords:** Rancher, Prometheus, Grafana, Kubernetes  
 **Abstract:** In this paper, we just talk about how to manage Kubernetes by using Rancher, which is installed on a Single Node using Docker, its version 2.4.  
 ## I.	Overview Rancher  
