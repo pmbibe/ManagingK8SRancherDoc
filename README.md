@@ -74,7 +74,7 @@ The table is the resource consumption of the Prometheus pod, which is based on t
 Additional pod resource requirement for cluster level monitoring.  
 ![Alt text](images/Pic011.PNG?raw=true "Title")  
 Besides the Prometheus pod, there are components that are deployed that require additional resources on the worker nodes.  
-![Alt text](images/Pic014.PNG?raw=true "Title")  
+![Alt text](images/Pic014.png?raw=true "Title")  
 With Project-level Monitoring Resource Requirements as the table showed below:  
 ![Alt text](images/Pic012.PNG?raw=true "Title")
 ### 2.	Prometheus Configuration  
