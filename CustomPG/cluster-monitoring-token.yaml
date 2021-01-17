@@ -1,0 +1,10 @@
+apiVersion: v1
+data:
+  ca.crt: XXXXX
+  namespace: XXXXX
+  token: XXXXX
+kind: Secret
+metadata:
+  name: cluster-monitoring-token-bqpj5
+  namespace: cattle-prometheus
+type: kubernetes.io/service-account-token
