@@ -1,0 +1,17 @@
+﻿apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: prometheus-ptmduc
+  name: prometheus-ptmduc
+  namespace: cattle-prometheus
+spec:
+  ports:
+  - name: metrics
+    port: 9090
+    protocol: TCP
+    targetPort: 9090
+  selector:
+    app: prometheus-ptmduc
+  sessionAffinity: None
+  type: ClusterIP

@@ -1,0 +1,16 @@
+﻿apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: grafana-ptmduc
+  name: grafana-ptmduc
+  namespace: cattle-prometheus
+spec:
+  ports:
+  - name: grafana-grafana-ptmduc
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: grafana-ptmduc
+  type: ClusterIP

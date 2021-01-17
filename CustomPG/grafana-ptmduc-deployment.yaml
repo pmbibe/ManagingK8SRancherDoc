@@ -1,0 +1,27 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:    
+    app: grafana-ptmduc
+  name: grafana-ptmduc
+  namespace: cattle-prometheus
+spec:
+  selector:
+    matchLabels:
+      app: grafana-ptmduc
+  template:
+    metadata:
+      labels:
+        app: grafana-ptmduc
+    spec:
+      containers:
+      - image: grafana/grafana
+        imagePullPolicy: Always
+        name: grafana-ptmduc
+        ports:
+        - containerPort: 3000
+          # hostPort: 3000
+          name: grafana
+          protocol: TCP
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
