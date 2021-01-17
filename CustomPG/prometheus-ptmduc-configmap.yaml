@@ -2,18 +2,44 @@ apiVersion: v1
 data:
   prometheus.yml: |-
     global:
-      scrape_interval: 15s 
+      scrape_interval: 1m
+      scrape_timeout: 10s
+      evaluation_interval: 1m
       external_labels:
-        monitor: 'codelab-monitor'
+        prometheus: cattle-prometheus/cluster-monitoring
+        prometheus_from: pmbibe
+        prometheus_replica: prometheus-cluster-monitoring-0
+    alerting:
+      alert_relabel_configs:
+      - separator: ;
+        regex: prometheus_replica
+        replacement: $1
+        action: labeldrop
+      alertmanagers:
+      - static_configs:
+        - targets:
+          - alertmanager-operated.cattle-prometheus:9093
+          labels:
+            cluster_id: c-v7cpk
+            cluster_name: pmbibe
+            level: cluster
+        scheme: http
+        timeout: 10s
+        api_version: v1
+    rule_files:
+    - /etc/prometheus/rules/prometheus-cluster-monitoring-rulefiles-0/*.yaml
     scrape_configs:
-      - job_name: 'prometheus'
-        scrape_interval: 5s
-        static_configs:
-          - targets: ['192.168.73.146:9100']
+    - job_name: prometheus
+      honor_timestamps: true
+      scrape_interval: 5s
+      scrape_timeout: 5s
+      metrics_path: /metrics
+      scheme: http
+      static_configs:
+      - targets:
+        - 192.168.73.146:9100
 kind: ConfigMap
 metadata:
-  annotations:
-    field.cattle.io/creatorId: user-kq9kp
   labels:
     cattle.io/creator: norman
   name: prometheus
