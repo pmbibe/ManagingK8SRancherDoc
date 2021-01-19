@@ -1,0 +1,25 @@
+apiVersion: v1
+data:
+  prometheus.yml: |-
+    global:
+      scrape_interval: 1m
+      scrape_timeout: 10s
+      evaluation_interval: 1m
+    scrape_configs:
+    - job_name: prometheus
+      honor_timestamps: true
+      scrape_interval: 5s
+      scrape_timeout: 5s
+      metrics_path: /metrics
+      scheme: http
+      static_configs:
+      - targets:
+        - 192.168.67.72:9100
+        - 192.168.67.73:9100
+        - 192.168.67.74:9100
+kind: ConfigMap
+metadata:
+  labels:
+    cattle.io/creator: norman
+  name: prometheus
+  namespace: cattle-prometheus

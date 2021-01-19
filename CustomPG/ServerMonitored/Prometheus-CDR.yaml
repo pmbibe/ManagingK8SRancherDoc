@@ -1,0 +1,272 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  annotations:
+    project.cattle.io/namespaces: '["cattle-prometheus","cattle-system","kube-node-lease","kube-public","kube-system"]'
+  creationTimestamp: "2021-01-12T03:54:01Z"
+  generation: 4
+  labels:
+    app: prometheus
+    chart: prometheus-0.0.1
+    heritage: Tiller
+    io.cattle.field/appId: cluster-monitoring
+    release: cluster-monitoring
+  managedFields:
+  - apiVersion: monitoring.coreos.com/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:project.cattle.io/namespaces: {}
+        f:labels:
+          .: {}
+          f:app: {}
+          f:chart: {}
+          f:heritage: {}
+          f:io.cattle.field/appId: {}
+          f:release: {}
+      f:spec:
+        .: {}
+        f:additionalAlertManagerConfigs:
+          .: {}
+          f:key: {}
+          f:name: {}
+        f:additionalScrapeConfigs:
+          .: {}
+          f:key: {}
+          f:name: {}
+        f:affinity:
+          .: {}
+          f:podAntiAffinity:
+            .: {}
+            f:preferredDuringSchedulingIgnoredDuringExecution: {}
+        f:arbitraryFSAccessThroughSMs: {}
+        f:configMaps: {}
+        f:containers: {}
+        f:evaluationInterval: {}
+        f:externalLabels:
+          .: {}
+          f:prometheus_from: {}
+        f:image: {}
+        f:listenLocal: {}
+        f:logFormat: {}
+        f:logLevel: {}
+        f:nodeSelector:
+          .: {}
+          f:kubernetes.io/os: {}
+        f:podMetadata:
+          .: {}
+          f:creationTimestamp: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:chart: {}
+            f:release: {}
+        f:replicas: {}
+        f:resources:
+          .: {}
+          f:limits:
+            .: {}
+            f:cpu: {}
+            f:memory: {}
+          f:requests:
+            .: {}
+            f:cpu: {}
+            f:memory: {}
+        f:retention: {}
+        f:ruleNamespaceSelector:
+          .: {}
+          f:matchExpressions: {}
+        f:ruleSelector:
+          .: {}
+          f:matchExpressions: {}
+        f:rules:
+          .: {}
+          f:alert: {}
+        f:scrapeInterval: {}
+        f:securityContext:
+          .: {}
+          f:fsGroup: {}
+          f:runAsNonRoot: {}
+          f:runAsUser: {}
+        f:serviceAccountName: {}
+        f:serviceMonitorNamespaceSelector:
+          .: {}
+          f:matchExpressions: {}
+        f:serviceMonitorSelector: {}
+        f:tolerations: {}
+        f:version: {}
+        f:volumes: {}
+    manager: Go-http-client
+    operation: Update
+    time: "2021-01-14T08:02:54Z"
+  name: cluster-monitoring
+  namespace: cattle-prometheus
+  resourceVersion: "4165693"
+  uid: 5b4e4ca7-2990-4892-97a9-fc3df476b6f7
+spec:
+  additionalAlertManagerConfigs:
+    key: additional-alertmanager-configs.yaml
+    name: prometheus-cluster-monitoring-additional-alertmanager-configs
+  additionalScrapeConfigs:
+    key: additional-scrape-configs.yaml
+    name: prometheus-cluster-monitoring-additional-scrape-configs
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              app: prometheus
+              prometheus: cluster-monitoring
+          topologyKey: kubernetes.io/hostname
+        weight: 100
+  arbitraryFSAccessThroughSMs: {}
+  configMaps:
+  - prometheus-cluster-monitoring-nginx
+  containers:
+  - command:
+    - /bin/sh
+    - -c
+    - cp /nginx/run-sh.tmpl /var/cache/nginx/nginx-start.sh; chmod +x /var/cache/nginx/nginx-start.sh;
+      /var/cache/nginx/nginx-start.sh
+    env:
+    - name: POD_IP
+      valueFrom:
+        fieldRef:
+          fieldPath: status.podIP
+    image: rancher/library-nginx:1.19.2-alpine
+    name: prometheus-proxy
+    ports:
+    - containerPort: 8080
+      name: nginx-http
+      protocol: TCP
+    resources:
+      limits:
+        cpu: 100m
+        memory: 100Mi
+      requests:
+        cpu: 50m
+        memory: 50Mi
+    securityContext:
+      runAsGroup: 101
+      runAsUser: 101
+    volumeMounts:
+    - mountPath: /nginx
+      name: configmap-prometheus-cluster-monitoring-nginx
+    - mountPath: /var/cache/nginx
+      name: nginx-home
+  - args:
+    - --proxy-url=http://127.0.0.1:9090
+    - --listen-address=$(POD_IP):9090
+    - --filter-reader-labels=prometheus
+    - --filter-reader-labels=prometheus_replica
+    command:
+    - prometheus-auth
+    env:
+    - name: POD_IP
+      valueFrom:
+        fieldRef:
+          fieldPath: status.podIP
+    image: rancher/prometheus-auth:v0.2.1
+    livenessProbe:
+      failureThreshold: 6
+      httpGet:
+        path: /-/healthy
+        port: web
+        scheme: HTTP
+      initialDelaySeconds: 300
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 10
+    name: prometheus-agent
+    ports:
+    - containerPort: 9090
+      name: web
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 10
+      httpGet:
+        path: /-/ready
+        port: web
+        scheme: HTTP
+      initialDelaySeconds: 60
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 10
+    resources:
+      limits:
+        cpu: 500m
+        memory: 200Mi
+      requests:
+        cpu: 100m
+        memory: 100Mi
+  evaluationInterval: 60s
+  externalLabels:
+    prometheus_from: agile
+  image: rancher/prom-prometheus:v2.18.2
+  listenLocal: true
+  logFormat: logfmt
+  logLevel: info
+  nodeSelector:
+    kubernetes.io/os: linux
+  podMetadata:
+    labels:
+      app: prometheus
+      chart: prometheus-0.0.1
+      release: cluster-monitoring
+  replicas: 1
+  resources:
+    limits:
+      cpu: "1"
+      memory: 1000Mi
+    requests:
+      cpu: 750m
+      memory: 750Mi
+  retention: 12h
+  ruleNamespaceSelector:
+    matchExpressions:
+    - key: field.cattle.io/projectId
+      operator: In
+      values:
+      - p-pkg8n
+    - key: field.cattle.io/projectId
+      operator: In
+      values:
+      - p-pkg8n
+  ruleSelector:
+    matchExpressions:
+    - key: source
+      operator: In
+      values:
+      - rancher-alert
+      - rancher-monitoring
+  rules:
+    alert: {}
+  scrapeInterval: 60s
+  securityContext:
+    fsGroup: 2000
+    runAsNonRoot: true
+    runAsUser: 1000
+  serviceAccountName: cluster-monitoring
+  serviceMonitorNamespaceSelector:
+    matchExpressions:
+    - key: field.cattle.io/projectId
+      operator: In
+      values:
+      - p-pkg8n
+    - key: field.cattle.io/projectId
+      operator: In
+      values:
+      - p-pkg8n
+  serviceMonitorSelector: {}
+  tolerations:
+  - effect: NoSchedule
+    key: cattle.io/os
+    operator: Equal
+    value: linux
+  version: v2.18.2
+  volumes:
+  - emptyDir: {}
+    name: nginx-home

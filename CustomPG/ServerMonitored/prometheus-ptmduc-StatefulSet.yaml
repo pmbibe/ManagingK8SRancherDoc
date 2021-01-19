@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: prometheus-server
+  name: prometheus-server
+  namespace: cattle-prometheus
+spec:
+  serviceName: prometheus-server
+  selector:
+    matchLabels:
+      app: prometheus-server
+  template:
+    metadata:
+      labels:
+        app: prometheus-server
+    spec:
+      serviceAccount: cluster-monitoring
+      serviceAccountName: cluster-monitoring
+      containers:
+      - image: prom/prometheus
+        imagePullPolicy: Always
+        name: prometheus-server
+        ports:
+        - containerPort: 9090
+          name: metrics
+          protocol: TCP
+        volumeMounts:
+        # - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        #   name: cluster-monitoring-token-bqpj5
+        - mountPath: /etc/prometheus
+          name: prometheus
+        # - mountPath: /etc/prometheus/secrets/exporter-etcd-cert
+        #   name: secret-exporter-etcd-cert
+          readOnly: true
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      volumes:
+      # - name: cluster-monitoring-token-bqpj5
+      #   secret:
+      #     defaultMode: 420
+      #     secretName: cluster-monitoring-token-bqpj5
+      - configMap:
+          defaultMode: 420
+          name: prometheus
+          optional: false
+        name: prometheus
+      # - name: secret-exporter-etcd-cert
+      #   secret:
+      #     defaultMode: 420
+      #     optional: false
+      #     secretName: exporter-etcd-cert
