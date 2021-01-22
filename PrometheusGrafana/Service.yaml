@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: expose-cmcglobals-metrics
+  namespace: cattle-prometheus
+  labels:
+    k8s-app: pmbibe
+    monitoring.coreos.com: "true"
+spec:
+  type: ClusterIP
+  ports:
+  - name: metrics
+    port: 9100
+    protocol: TCP
+  selector:
+    k8s-app: pmbibe
+    monitoring.coreos.com: "true"

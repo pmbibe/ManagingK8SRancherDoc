@@ -1,0 +1,33 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app: exporter-pmbibe
+  name: exporter-pmbibe-cluster-monitoring
+  namespace: cattle-prometheus
+spec:
+  endpoints:
+  - port: metrics
+    interval: 30s
+    scheme: http
+    path: /prometheus
+    relabelings:
+    - action: replace
+      regex: (.+)
+      replacement: $1
+      sourceLabels:
+      - __meta_kubernetes_pod_host_ip
+      targetLabel: host_ip
+    - action: replace
+      regex: (.+)
+      replacement: $1
+      sourceLabels:
+      - __meta_kubernetes_pod_node_name
+      targetLabel: node
+  namespaceSelector:
+    matchNames:
+    - cattle-prometheus
+  selector:
+    matchLabels:
+      k8s-app: pmbibe
+      monitoring.coreos.com: "true"

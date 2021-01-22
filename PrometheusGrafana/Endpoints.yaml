@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Endpoints
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: ""
+  labels:
+    k8s-app: pmbibe
+    monitoring.coreos.com: "true"
+  name: expose-node-metrics
+  namespace: cattle-prometheus
+subsets:
+- addresses:
+  - ip: 192.168.67.72
+  - ip: 192.168.67.73
+  - ip: 192.168.67.74
+  ports:
+  - name: metrics
+    port: 9100
+    protocol: TCP
