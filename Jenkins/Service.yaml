@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: expose-jenkins-metrics
+  namespace: cattle-prometheus
+  labels:
+    k8s-app: jenkins
+    monitoring.coreos.com: "true"
+spec:
+  type: ClusterIP
+  ports:
+  - name: metrics
+    port: 8080
+    protocol: TCP
+  selector:
+    k8s-app: jenkins
+    monitoring.coreos.com: "true"

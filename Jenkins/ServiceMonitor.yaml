@@ -1,0 +1,46 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app: exporter-jenkins
+  name: exporter-jenkins
+  namespace: cattle-prometheus
+spec:
+  endpoints:
+  - port: metrics
+    interval: 30s
+    scheme: http
+    path: prometheus
+    relabelings:
+    - sourceLabels:
+      - __meta_kubernetes_service_annotation_prometheus_io_scrape
+      action: keep
+      # regex: true
+    - sourceLabels: 
+      - __meta_kubernetes_service_annotation_prometheus_io_path
+      action: replace
+      targetLabel: __metrics_path__
+      regex: (.+)
+    - sourceLabels: 
+      - __address__, __meta_kubernetes_service_annotation_prometheus_io_port
+      action: replace
+      regex: ([^:]+)(?::\d+)?;(\d+)
+      replacement: $1:$2
+      targetLabel: __address__
+    - action: labelmap
+      regex: __meta_kubernetes_service_label_(.+)
+    - sourceLabels: 
+      - __meta_kubernetes_namespace
+      action: replace
+      targetLabel: kubernetes_namespace
+    - sourceLabels: 
+      - __meta_kubernetes_service_name
+      action: replace
+      targetLabel: kubernetes_service_name
+  namespaceSelector:
+    matchNames:
+    - cattle-prometheus
+  selector:
+    matchLabels:
+      k8s-app: jenkins
+      monitoring.coreos.com: "true"
