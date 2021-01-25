@@ -7,7 +7,7 @@ metadata:
     k8s-app: jenkins
     monitoring.coreos.com: "true"
 spec:
-  type: ClusterIP
+  clusterIP: None
   ports:
   - name: metrics
     port: 8080
