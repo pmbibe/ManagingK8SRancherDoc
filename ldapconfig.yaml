@@ -1,0 +1,24 @@
+apiVersion: v1
+data:
+  ldap.toml: |-
+    [[servers]]
+    host = "sv-ldap2.ldap.pmbibe.com.vn"
+    port = 389
+    use_ssl = false
+    start_tls = false
+    ssl_skip_verify = false
+    bind_dn = "CN=Devops Service - CMC Global,CN=Users,DC=ldap,DC=pmbibe,DC=com,DC=vn"
+    bind_password = 'pmbibe@2020'
+    search_filter =  "(sAMAccountName=%s)"
+    search_base_dns = ["OU=DU12,DC=ldap,DC=pmbibe,DC=com,DC=vn"]
+    [servers.attributes]
+    email =  "mail"
+    name = "givenName"
+    surname = "sn"
+    username = "sAMAccountName"
+kind: ConfigMap
+metadata:
+  labels:
+    cattle.io/creator: norman
+  name: ldapconfig
+  namespace: cattle-prometheus
